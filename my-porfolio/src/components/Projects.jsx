@@ -38,7 +38,7 @@ function Projects() {
       link: null,
       icon: '🎵',
       badge: 'In Progress',
-      tech: ['React', 'CSS', 'Vite', 'Spotify API'],
+      tech: ['React Native', 'CSS', 'JavaScript'],
       status: 'Soon'
     }
   ]
