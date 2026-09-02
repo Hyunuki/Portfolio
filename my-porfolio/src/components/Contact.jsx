@@ -61,50 +61,33 @@ function Contact() {
                   <div className="contact-card-value">github.com/Hyunuki</div>
                 </div>
               </a>
-            </div>
-          </div>
 
-          {/* Right: Form */}
-          <div className="reveal reveal-delay-3">
-            <form className="contact-form" onSubmit={handleSubmit} id="contact-form">
-              <div className="form-group">
-                <label className="form-label" htmlFor="contact-name">Name</label>
-                <input
-                  id="contact-name"
-                  className="form-input"
-                  type="text"
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label" htmlFor="contact-email">Email</label>
-                <input
-                  id="contact-email"
-                  className="form-input"
-                  type="email"
-                  placeholder="your@email.com"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label" htmlFor="contact-message">Message</label>
-                <textarea
-                  id="contact-message"
-                  className="form-textarea"
-                  placeholder="Say something nice..."
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="btn-primary"
-                id="contact-submit-btn"
-                style={{ alignSelf: 'flex-start' }}
+              <a
+                href="https://www.facebook.com/Angelopanes4"
+                className="contact-card"
+                id="contact-email-link"
               >
-                {sent ? '✅ Message Sent!' : 'Send Message ✉️'}
-              </button>
-            </form>
+                <div className="contact-card-icon facebook">📘</div>
+                <div>
+                  <div className="contact-card-label">Facebook</div>
+                  <div className="contact-card-value">facebook.com/Angelopanes4</div>
+                </div>
+              </a>
+
+              <a
+                href="https://www.instagram.com/_g.loe/"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-card"
+                id="contact-instagram-link"
+              >
+                <div className="contact-card-icon instagram">📷</div>
+                <div>
+                  <div className="contact-card-label">Instagram</div>
+                  <div className="contact-card-value">instagram.com/_g.loe/</div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>

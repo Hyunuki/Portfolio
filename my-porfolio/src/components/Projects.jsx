@@ -20,7 +20,7 @@ function Projects() {
       link: 'https://github.com/AdamCutie/SiaPayrollSystem',
       icon: '💼',
       badge: 'Capstone',
-      tech: ['JavaScript', 'HTML', 'CSS', 'GitHub'],
+      tech: ['JavaScript', 'Python', 'PowerShell', 'GitHub'],
       status: 'Live'
     },
     {
@@ -34,7 +34,7 @@ function Projects() {
     },
     {
       title: 'Loudr',
-      description: 'A music player using spotify api',
+      description: 'Loudr is a modern, web-based music streaming platform designed to make discovering, streaming, and sharing music seamless. Combining high-fidelity audio playback with personalized recommendations, Loudr gives listeners instant access to millions of tracks, curated playlists, and real-time artist updates—all wrapped in a clean, intuitive web interface.',
       link: null,
       icon: '🎵',
       badge: 'In Progress',
