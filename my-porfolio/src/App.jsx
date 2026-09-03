@@ -5,7 +5,7 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import './App.css'
 
-/* ── Animated floating pixel dots ── */
+
 function PixelDots() {
   const canvasRef = useRef(null)
 
@@ -21,12 +21,12 @@ function PixelDots() {
     resize()
     window.addEventListener('resize', resize)
 
-    // Create dots
+
     const DOT_COUNT = 60
     const dots = Array.from({ length: DOT_COUNT }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      size: Math.random() < 0.5 ? 3 : 5,   // pixel sizes: 3 or 5
+      size: Math.random() < 0.5 ? 3 : 5,
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
       opacity: 0.12 + Math.random() * 0.22,
@@ -35,18 +35,18 @@ function PixelDots() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       dots.forEach(d => {
-        // Pixel-snap to grid (crisp squares)
+
         const px = Math.round(d.x / 4) * 4
         const py = Math.round(d.y / 4) * 4
         ctx.globalAlpha = d.opacity
         ctx.fillStyle = '#111'
         ctx.fillRect(px, py, d.size, d.size)
 
-        // Move
+
         d.x += d.vx
         d.y += d.vy
 
-        // Wrap
+
         if (d.x < -10) d.x = canvas.width + 10
         if (d.x > canvas.width + 10) d.x = -10
         if (d.y < -10) d.y = canvas.height + 10
@@ -114,10 +114,10 @@ function Footer() {
 function App() {
   return (
     <div className="app">
-      {/* Animated floating pixel dots background */}
+
       <PixelDots />
 
-      {/* Static dot-grid overlay */}
+
       <div className="bg-canvas">
         <div className="bg-grid"></div>
       </div>
