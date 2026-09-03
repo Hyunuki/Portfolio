@@ -66,12 +66,11 @@ body {
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   image-rendering: pixelated;
-  /* Custom pixel crosshair cursor — black version for light bg */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='11' y='0' width='2' height='8' fill='%23111'/%3E%3Crect x='11' y='16' width='2' height='8' fill='%23111'/%3E%3Crect x='0' y='11' width='8' height='2' fill='%23111'/%3E%3Crect x='16' y='11' width='8' height='2' fill='%23111'/%3E%3Crect x='10' y='10' width='4' height='4' fill='%23111'/%3E%3C/svg%3E") 12 12, crosshair;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='20' viewBox='0 0 13 20' shape-rendering='crispEdges'%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23ffffff' stroke='%23ffffff' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23111111'/%3E%3C/svg%3E") 0 0, default;
 }
 
 a, button, [role="button"], input, textarea, .project-card {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='11' y='0' width='2' height='8' fill='%23111'/%3E%3Crect x='11' y='16' width='2' height='8' fill='%23111'/%3E%3Crect x='0' y='11' width='8' height='2' fill='%23111'/%3E%3Crect x='16' y='11' width='8' height='2' fill='%23111'/%3E%3Crect x='9' y='9' width='6' height='6' fill='%23111'/%3E%3C/svg%3E") 12 12, pointer;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='20' viewBox='0 0 13 20' shape-rendering='crispEdges'%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23ffffff' stroke='%23ffffff' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23111111'/%3E%3C/svg%3E") 0 0, pointer;
 }
 
 /* Scrollbar */

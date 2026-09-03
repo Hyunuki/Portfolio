@@ -1,13 +1,19 @@
 import { useEffect, useRef } from 'react'
+import { ThemeProvider, useTheme } from './ThemeContext'
 import Navbar from './components/Navbar'
 import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import './App.css'
 
-
 function PixelDots() {
+  const { theme } = useTheme()
   const canvasRef = useRef(null)
+  const themeRef = useRef(theme)
+
+  useEffect(() => {
+    themeRef.current = theme
+  }, [theme])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -21,7 +27,6 @@ function PixelDots() {
     resize()
     window.addEventListener('resize', resize)
 
-
     const DOT_COUNT = 60
     const dots = Array.from({ length: DOT_COUNT }, () => ({
       x: Math.random() * window.innerWidth,
@@ -34,19 +39,15 @@ function PixelDots() {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const color = themeRef.current === 'dark' ? '#fff' : '#111'
       dots.forEach(d => {
-
         const px = Math.round(d.x / 4) * 4
         const py = Math.round(d.y / 4) * 4
         ctx.globalAlpha = d.opacity
-        ctx.fillStyle = '#111'
+        ctx.fillStyle = color
         ctx.fillRect(px, py, d.size, d.size)
-
-
         d.x += d.vx
         d.y += d.vy
-
-
         if (d.x < -10) d.x = canvas.width + 10
         if (d.x > canvas.width + 10) d.x = -10
         if (d.y < -10) d.y = canvas.height + 10
@@ -74,20 +75,16 @@ function Hero() {
           <span className="hero-badge-dot"></span>
           Available for OJT/Internship
         </div>
-
         <h1 className="hero-name">
           Hi, I'm{' '}
           <span className="hero-name-gradient">Angelo</span>
         </h1>
-
         <p className="hero-title">Front-End Developer &amp; React Learner</p>
-
         <p className="hero-desc">
           I build pixel-perfect, interactive web experiences.
           Currently on my journey mastering React and modern front-end development —
           one component at a time.
         </p>
-
         <div className="hero-cta">
           <a href="#Projects" className="btn-primary" id="hero-view-projects-btn">
             View Projects &#10022;
@@ -111,17 +108,13 @@ function Footer() {
   )
 }
 
-function App() {
+function AppContent() {
   return (
     <div className="app">
-
       <PixelDots />
-
-
       <div className="bg-canvas">
         <div className="bg-grid"></div>
       </div>
-
       <Navbar />
       <Hero />
       <About />
@@ -129,6 +122,14 @@ function App() {
       <Contact />
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   )
 }
 

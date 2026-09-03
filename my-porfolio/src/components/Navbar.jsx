@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTheme } from '../ThemeContext'
 
 const SunIcon = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
@@ -28,7 +29,8 @@ const MoonIcon = () => (
   </svg>
 )
 
-function Navbar({ theme, toggleTheme }) {
+function Navbar() {
+  const { theme, toggleTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -48,7 +50,7 @@ function Navbar({ theme, toggleTheme }) {
 
       <button
         className={`navbar-toggle ${menuOpen ? 'open' : ''}`}
-        onClick={() => setMenuOpen(!menuOpen)}
+        onClick={() => setMenuOpen(m => !m)}
         aria-label="Toggle navigation"
         id="nav-toggle-btn"
       >

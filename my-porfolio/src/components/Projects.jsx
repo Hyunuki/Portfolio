@@ -91,8 +91,8 @@ function Projects() {
       icon: '[2024]',
       badge: 'Game Dev',
       role: 'Game Designer & Dev',
-      tech: ['Game Design', 'RPG Mechanics', 'JavaScript', 'Canvas API'],
-      image: '/proj_pawnsquest.jpg',
+      tech: ['XAMP', 'PHP', 'JavaScript', 'Figma'],
+      image: '/ThePawnQuest.png',
     },
     {
       title: 'React Calculator',
