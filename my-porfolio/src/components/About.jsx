@@ -39,8 +39,7 @@ function About() {
           {/* Avatar */}
           <div className="about-avatar-wrap">
             <img
-              src={avatarPlaceholder}
-              alt="Angelo Gabriel — placeholder photo"
+              src={`/Picture.jpg`}
               className="about-avatar"
               id="about-avatar-img"
             />

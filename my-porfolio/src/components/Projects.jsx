@@ -1,7 +1,57 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+function ProjectModal({ project, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-window" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-titlebar">
+          <span className="modal-titlebar-title">{project.icon} {project.title}</span>
+          <button className="modal-close-btn" onClick={onClose}>[X]</button>
+        </div>
+
+        <div className="modal-img-wrap">
+          <img src={project.image} alt={project.title} className="modal-img" />
+        </div>
+
+        <div className="modal-body">
+          <div className="modal-meta">
+            <span className="modal-role">{project.role}</span>
+            <span className="modal-badge">{project.badge}</span>
+          </div>
+
+          <p className="modal-desc">{project.description}</p>
+
+          <div className="modal-tech">
+            {project.tech.map((t, i) => (
+              <span className="tech-tag" key={i}>{t}</span>
+            ))}
+          </div>
+
+          <div className="modal-actions">
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noreferrer" className="btn-primary">
+                View on GitHub ↗
+              </a>
+            ) : (
+              <span className="modal-coming-soon">&gt;&gt; COMING SOON...</span>
+            )}
+            <button className="btn-outline" onClick={onClose}>Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function Projects() {
   const ref = useRef(null)
+  const [active, setActive] = useState(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,143 +66,106 @@ function Projects() {
   const projects = [
     {
       title: 'SheEssentials Payroll System',
-      description: 'A full-featured payroll management system built as a capstone project. Handles employee records, salary computation, and payslip generation.',
+      description: 'A full-featured payroll management system built as a capstone project. Handles employee records, salary computation, deductions, and payslip generation.',
       link: 'https://github.com/AdamCutie/SiaPayrollSystem',
       icon: '[=]',
       badge: 'Capstone',
       role: 'Front-End Dev',
       tech: ['JavaScript', 'Python', 'PowerShell', 'GitHub'],
-      status: 'Live',
-      year: '2nd Year'
+      image: '/proj_payroll.jpg',
     },
     {
       title: 'QCU MerchMart',
-      description: 'An e-commerce platform for QCU official merchandise. Designed the full UI/UX — from wireframes and prototypes to the final visual interface — creating a seamless shopping experience for students and staff.',
+      description: 'An e-commerce platform for QCU official merchandise. I led the full UI/UX design process — from wireframes to high-fidelity prototypes — creating a seamless shopping experience for students and university staff.',
       link: null,
       icon: '[M]',
       badge: 'Academic',
       role: 'UI/UX Designer',
       tech: ['Figma', 'UI/UX', 'Prototyping', 'Wireframing'],
-      status: 'Done',
-      year: '2nd Year'
+      image: '/proj_merchmart.jpg',
     },
     {
       title: "Pawn's Quest",
-      description: "An RPG-style quest-solving game where players take on the role of a pawn navigating through puzzle-driven levels. Features turn-based mechanics, hand-crafted level design, and a retro 8-bit art direction.",
+      description: "An RPG-style quest-solving game where players control a chess pawn through puzzle-driven dungeon levels. Features turn-based combat, hand-crafted maps, NPC interactions, and a retro 8-bit art direction.",
       link: null,
       icon: '[P]',
       badge: 'Game Dev',
       role: 'Game Designer & Dev',
-      tech: ['Game Design', 'RPG Mechanics', 'JavaScript', 'Canvas'],
-      status: 'Done',
-      year: '2nd Year'
+      tech: ['Game Design', 'RPG Mechanics', 'JavaScript', 'Canvas API'],
+      image: '/proj_pawnsquest.jpg',
     },
     {
       title: 'React Calculator',
-      description: 'A clean, interactive calculator built with React — exploring component state, event handling, and UI logic.',
+      description: 'A clean, interactive calculator built with React. Explores component state, event handling, and conditional rendering with a minimalist pixel-themed UI.',
       link: null,
       icon: '[C]',
       badge: 'In Progress',
       role: 'Front-End Dev',
       tech: ['React', 'CSS', 'Vite'],
-      status: 'Soon',
-      year: '2nd Year'
+      image: '/proj_calculator.jpg',
     },
     {
       title: 'Loudr',
-      description: 'A modern web-based music streaming platform designed to make discovering, streaming, and sharing music seamless — with high-fidelity audio and personalized recommendations.',
+      description: 'A modern web-based music streaming platform with high-fidelity audio playback, personalized recommendations, curated playlists, and real-time artist updates.',
       link: null,
       icon: '[L]',
       badge: 'In Progress',
       role: 'Front-End Dev',
-      tech: ['React Native', 'CSS', 'JavaScript'],
-      status: 'Soon',
-      year: '2nd Year'
-    }
+      tech: ['React', 'CSS', 'JavaScript', 'Web Audio API'],
+      image: '/proj_loudr.jpg',
+    },
   ]
 
-  // Group by academic year
-  const grouped = projects.reduce((acc, p) => {
-    if (!acc[p.year]) acc[p.year] = []
-    acc[p.year].push(p)
-    return acc
-  }, {})
-
-  const yearOrder = ['1st Year', '2nd Year', '3rd Year', '4th Year']
-  const sortedYears = Object.keys(grouped).sort(
-    (a, b) => yearOrder.indexOf(a) - yearOrder.indexOf(b)
-  )
-
   return (
-    <section id="Projects" className="section" ref={ref}>
-      <div className="section-inner">
-        <span className="section-label reveal">What I've Built</span>
-        <h2 className="section-title reveal reveal-delay-1">Projects</h2>
-        <div className="section-divider reveal reveal-delay-1"></div>
+    <>
+      <section id="Projects" className="section" ref={ref}>
+        <div className="section-inner">
+          <span className="section-label reveal">What I've Built</span>
+          <h2 className="section-title reveal reveal-delay-1">Projects</h2>
+          <div className="section-divider reveal reveal-delay-1"></div>
 
-        {sortedYears.map((year, yi) => (
-          <div className={`year-group reveal reveal-delay-${yi + 1}`} key={year}>
-            {/* Year header */}
-            <div className="year-group-header">
-              <span className="year-group-label">-- {year} --</span>
-              <div className="year-group-line"></div>
-            </div>
+          <p className="projects-hint reveal reveal-delay-2">&gt; Click any card to view details</p>
 
-            {/* Cards */}
-            <div className="projects-grid">
-              {grouped[year].map((project, index) => (
-                <div
-                  className="project-card"
-                  key={index}
-                  id={`project-card-${yi}-${index}`}
-                >
-                  {/* OS title bar */}
-                  <div className="project-card-header">
-                    <div className="project-icon">{project.icon}</div>
-                    <span className="project-badge">{project.badge}</span>
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <div
+                className={`project-card reveal reveal-delay-${(index % 3) + 1}`}
+                key={index}
+                id={`project-card-${index}`}
+                onClick={() => setActive(project)}
+              >
+                <div className="project-card-header">
+                  <div className="project-icon">{project.icon}</div>
+                  <span className="project-badge">{project.badge}</span>
+                </div>
+
+                <div className="project-thumb-wrap">
+                  <img src={project.image} alt={project.title} className="project-thumb" />
+                  <div className="project-thumb-overlay">
+                    <span className="project-thumb-cta">[VIEW]</span>
                   </div>
+                </div>
 
-                  {/* Body */}
-                  <div className="project-card-body">
-                    <span className="project-role">{project.role}</span>
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-desc">{project.description}</p>
-
-                    <div className="project-tech">
-                      {project.tech.map((t, i) => (
-                        <span className="tech-tag" key={i}>{t}</span>
-                      ))}
-                    </div>
-
-                    {project.link ? (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-link"
-                        id={`project-link-${yi}-${index}`}
-                      >
-                        View on GitHub
-                        <span className="project-link-arrow"> ↗</span>
-                      </a>
-                    ) : (
-                      <span style={{
-                        fontFamily: "'VT323', monospace",
-                        fontSize: '1.1rem',
-                        color: '#999',
-                        letterSpacing: '1px'
-                      }}>
-                        &gt;&gt; COMING SOON...
-                      </span>
+                <div className="project-card-body">
+                  <span className="project-role">{project.role}</span>
+                  <h3 className="project-title">{project.title}</h3>
+                  <div className="project-tech">
+                    {project.tech.slice(0, 3).map((t, i) => (
+                      <span className="tech-tag" key={i}>{t}</span>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <span className="tech-tag">+{project.tech.length - 3}</span>
                     )}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {active && <ProjectModal project={active} onClose={() => setActive(null)} />}
+    </>
   )
 }
 

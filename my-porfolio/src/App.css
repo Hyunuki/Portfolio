@@ -577,41 +577,19 @@
    PROJECTS
 ═══════════════════════════════════════════════════ */
 
-/* ── Year group heading ── */
-.year-group {
-  margin-bottom: 3.5rem;
-}
-
-.year-group-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.year-group-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.65rem;
-  color: #111;
-  letter-spacing: 2px;
-  white-space: nowrap;
-  text-shadow: 2px 2px 0 #ccc;
-}
-
-.year-group-line {
-  flex: 1;
-  height: 2px;
-  background: repeating-linear-gradient(90deg,
-      #555 0px,
-      #555 6px,
-      transparent 6px,
-      transparent 12px);
+/* Hint text */
+.projects-hint {
+  font-family: 'VT323', monospace;
+  font-size: 1.15rem;
+  color: #888;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
 }
 
 /* ── Project grid ── */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
@@ -626,21 +604,13 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  outline: none;
 }
 
-.project-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  opacity: 0;
-  z-index: 0;
-}
-
-.project-card:hover {
+.project-card:hover,
+.project-card:focus {
   border-color: #111;
   box-shadow: 5px 5px 0 #111;
-  transform: none;
 }
 
 .project-card>* {
@@ -658,19 +628,67 @@
   border-bottom: 2px solid #111;
 }
 
+/* ── Card thumbnail ── */
+.project-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #eee;
+  border-bottom: 2px solid #ddd;
+}
+
+.project-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: pixelated;
+  filter: grayscale(0.2) contrast(1.05);
+  transition: filter 0.15s;
+}
+
+/* Hover overlay */
+.project-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s steps(3);
+}
+
+.project-card:hover .project-thumb-overlay,
+.project-card:focus .project-thumb-overlay {
+  opacity: 1;
+}
+
+.project-thumb-cta {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: #fff;
+  letter-spacing: 1px;
+  border: 2px solid #fff;
+  padding: 0.5rem 0.85rem;
+  box-shadow: 3px 3px 0 #aaa;
+}
+
+/* ── Card body ── */
 .project-card-body {
-  padding: 1.25rem 1.5rem 1.5rem;
+  padding: 1.1rem 1.25rem 1.4rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .project-icon {
-  font-size: 1rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: #fff;
   display: flex;
   align-items: center;
-  /* Force dark / desaturated emoji */
-  filter: grayscale(1) contrast(1.1);
 }
 
 .project-badge {
@@ -685,13 +703,12 @@
   letter-spacing: 0.5px;
 }
 
-/* Role badge for project (UI/UX, Dev, etc.) */
 .project-role {
   display: inline-block;
   font-family: 'Press Start 2P', monospace;
   font-size: 0.36rem;
   padding: 0.2rem 0.5rem;
-  border: 1px solid #aaa;
+  border: 1px solid #bbb;
   color: #666;
   background: #f5f5f5;
   margin-bottom: 0.6rem;
@@ -700,20 +717,20 @@
 
 .project-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 400;
   color: #111;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   letter-spacing: 0.5px;
   line-height: 1.7;
 }
 
 .project-desc {
   font-family: 'VT323', monospace;
-  font-size: 1.25rem;
-  color: #555;
+  font-size: 1.2rem;
+  color: #666;
   line-height: 1.5;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   flex: 1;
 }
 
@@ -721,7 +738,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-bottom: 1.25rem;
 }
 
 .tech-tag {
@@ -735,35 +751,180 @@
   color: #555;
 }
 
-.project-link {
-  display: inline-flex;
+
+/* ═══════════════════════════════════════════════════
+   PROJECT MODAL
+═══════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9000;
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  color: #fff;
+  justify-content: center;
+  padding: 2rem 1rem;
+  /* Pixelated scanline tint over overlay */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.15) 3px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
+
+.modal-window {
+  background: #fff;
+  border: 3px solid #111;
+  box-shadow: 8px 8px 0 #111;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar inside modal */
+.modal-window::-webkit-scrollbar { width: 6px; }
+.modal-window::-webkit-scrollbar-track  { background: #eee; }
+.modal-window::-webkit-scrollbar-thumb  { background: #555; border: 1px solid #111; }
+
+/* ── Modal title bar ── */
+.modal-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
   background: #111;
-  text-decoration: none;
+  border-bottom: 2px solid #111;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.modal-titlebar-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.modal-close-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.48rem;
+  color: #111;
+  background: #fff;
+  border: 2px solid #fff;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.1s, color 0.1s;
+}
+
+.modal-close-btn:hover {
+  background: #ff4444;
+  color: #fff;
+  border-color: #ff4444;
+}
+
+/* ── Modal project image ── */
+.modal-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #e8e8e8;
+  border-bottom: 2px solid #ccc;
+  overflow: hidden;
+}
+
+.modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  image-rendering: pixelated;
+  filter: grayscale(0.15) contrast(1.05);
+}
+
+.modal-img-label {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.5);
+  padding: 0.1rem 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+/* ── Modal body ── */
+.modal-body {
+  padding: 1.5rem 2rem 2rem;
+}
+
+.modal-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.modal-role {
   font-family: 'Press Start 2P', monospace;
   font-size: 0.42rem;
-  font-weight: 400;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #bbb;
+  color: #666;
+  background: #f5f5f5;
   letter-spacing: 0.5px;
-  border: 2px solid #111;
-  padding: 0.4rem 0.75rem;
-  transition: background 0.1s, color 0.1s;
-  align-self: flex-start;
 }
 
-.project-link:hover {
-  background: #fff;
-  color: #111;
+.modal-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.42rem;
+  padding: 0.25rem 0.6rem;
+  background: #111;
+  color: #fff;
+  letter-spacing: 0.5px;
 }
 
-.project-link-arrow {
-  transition: none;
+.modal-desc {
+  font-family: 'VT323', monospace;
+  font-size: 1.35rem;
+  color: #333;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  border-left: 3px solid #111;
+  padding-left: 1rem;
 }
 
-.project-link:hover .project-link-arrow {
-  transform: none;
+.modal-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
 }
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.modal-coming-soon {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  color: #999;
+  letter-spacing: 1px;
+}
+
+
 
 
 /* ═══════════════════════════════════════════════════

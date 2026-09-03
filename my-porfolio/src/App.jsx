@@ -72,7 +72,7 @@ function Hero() {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="hero-badge-dot"></span>
-          Available for projects
+          Available for OJT/Internship
         </div>
 
         <h1 className="hero-name">
