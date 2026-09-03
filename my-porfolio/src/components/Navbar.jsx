@@ -14,7 +14,7 @@ function Navbar() {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <a href="#About" className="navbar-logo" onClick={closeMenu}>
+      <a href="#hero" className="navbar-logo" onClick={closeMenu}>
         &lt;Angelo.dev /&gt;
       </a>
 
