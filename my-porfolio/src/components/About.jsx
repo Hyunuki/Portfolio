@@ -48,7 +48,7 @@ function About() {
 
           {/* Bio */}
           <div>
-            <p style={{ fontFamily: "'VT323', monospace", fontSize: '1.4rem', color: '#444', lineHeight: '1.7', maxWidth: '620px' }}>
+            <p style={{ fontFamily: "'VT323', monospace", fontSize: '1.4rem', color: '#5a5656ff', lineHeight: '1.7', maxWidth: '620px' }}>
               Hey! I'm <strong style={{ color: '#111' }}>Angelo Gabriel</strong> — a front-end developer
               and UI/UX designer passionate about crafting beautiful, user-friendly web experiences.
               I'm currently learning React and building this portfolio to document

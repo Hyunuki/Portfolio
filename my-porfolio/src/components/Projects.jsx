@@ -39,7 +39,7 @@ function ProjectModal({ project, onClose }) {
                 View on GitHub ↗
               </a>
             ) : (
-              <span className="modal-coming-soon">&gt;&gt; COMING SOON...</span>
+              <span className="modal-coming-soon">&gt;&gt; No Repository Yet...</span>
             )}
             <button className="btn-outline" onClick={onClose}>Close</button>
           </div>
@@ -52,16 +52,6 @@ function ProjectModal({ project, onClose }) {
 function Projects() {
   const ref = useRef(null)
   const [active, setActive] = useState(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting)),
-      { threshold: 0.1 }
-    )
-    const els = ref.current?.querySelectorAll('.reveal') || []
-    els.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
 
   const projects = [
     {
@@ -114,7 +104,46 @@ function Projects() {
       tech: ['React', 'CSS', 'JavaScript', 'Web Audio API'],
       image: '/proj_loudr.jpg',
     },
+    {
+      title: 'QCU Library Management System',
+      description: 'A modern web-based Library Management System for Quezon City University, enabling faculty and students to efficiently search, borrow, and manage library resources. Features include a responsive catalog, real-time availability tracking, and administrative dashboards for librarians.',
+      link: null,
+      icon: '[2024]',
+      badge: 'Academic',
+      role: 'UI/UX Designer & Developer',
+      tech: ['Figma', 'UI/UX', 'Prototyping', 'Wireframing'],
+      image: '/LibraryManagementSystem.png',
+    },
   ]
+
+  useEffect(() => {
+    const container = ref.current
+    if (!container) return
+
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible')
+          io.unobserve(e.target)
+        }
+      }),
+      { threshold: 0.1 }
+    )
+
+    const observeAll = () => {
+      container.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el))
+    }
+
+    observeAll()
+
+    const mo = new MutationObserver(observeAll)
+    mo.observe(container, { childList: true, subtree: true })
+
+    return () => {
+      io.disconnect()
+      mo.disconnect()
+    }
+  }, [])
 
   return (
     <>
