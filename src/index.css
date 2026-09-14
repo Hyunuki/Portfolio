@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* ── Palette — White void theme ── */
+  --bg-primary:    #f5f5f0;
+  --bg-secondary:  #ebebeb;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f0f0f0;
+
+  --border:        rgba(0, 0, 0, 0.15);
+  --border-bright: rgba(0, 0, 0, 0.7);
+  --border-hover:  #000000;
+
+  --text-primary:   #111111;
+  --text-secondary: #333333;
+  --text-muted:     #777777;
+  --text-dim:       #aaaaaa;
+
+  --accent:       #000000;
+  --accent-light: #222222;
+  --accent-glow:  rgba(0, 0, 0, 0.12);
+
+  --cyan:         #444444;
+  --cyan-glow:    rgba(0, 0, 0, 0.08);
+  --pink:         #555555;
+
+  --gradient-hero: linear-gradient(135deg, #111 0%, #555 100%);
+  --gradient-card: linear-gradient(135deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.01) 100%);
+  --gradient-text: linear-gradient(135deg, #111, #555);
+
+  --shadow-sm:   0 2px 0 rgba(0,0,0,0.08);
+  --shadow-md:   0 4px 0 rgba(0,0,0,0.12);
+  --shadow-lg:   0 0 0 2px rgba(0,0,0,0.15);
+  --shadow-glow: 0 0 20px rgba(0,0,0,0.08);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+
+  --transition-fast: 0.1s steps(3);
+  --transition-med:  0.15s steps(4);
+  --transition-slow: 0.3s steps(6);
+
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  line-height: 1.6;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  image-rendering: pixelated;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='20' viewBox='0 0 13 20' shape-rendering='crispEdges'%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23ffffff' stroke='%23ffffff' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23111111'/%3E%3C/svg%3E") 0 0, default;
+}
+
+a, button, [role="button"], input, textarea, .project-card {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='20' viewBox='0 0 13 20' shape-rendering='crispEdges'%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23ffffff' stroke='%23ffffff' stroke-width='2' stroke-linejoin='miter'/%3E%3Cpath d='M0 0L0 14L4 10L6 17L9 16L7 9L11 9Z' fill='%23111111'/%3E%3C/svg%3E") 0 0, pointer;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track  { background: #e8e8e8; }
+::-webkit-scrollbar-thumb  { background: #888; border: 1px solid #000; }
+::-webkit-scrollbar-thumb:hover { background: #000; }
+
+/* Selection */
+::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
